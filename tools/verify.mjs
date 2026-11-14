@@ -14,9 +14,9 @@ const argv = process.argv.slice(2);
 const pickTarget = () => {
   const i = argv.indexOf('--target');
   const name = i >= 0 && argv[i + 1] ? argv[i + 1] : 'obf';
-  return name === 'obf2'
-    ? import('../targets/sign.obf2.mjs')
-    : import('../targets/sign.obf.mjs');
+  if (name === 'obf3') return import('../targets/sign.obf3.mjs');
+  if (name === 'obf2') return import('../targets/sign.obf2.mjs');
+  return import('../targets/sign.obf.mjs');
 };
 const { sign: target } = await pickTarget();
 const { sign: answer } = await import('../reference/answer.mjs');
